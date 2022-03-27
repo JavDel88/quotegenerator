@@ -6,10 +6,12 @@ import Button from './Components/Button';
 
 function App() {
 
+  const colors = ['Green', 'Red', 'Blue', 'Orange', 'Purple']
   let quoteNumber = Math.floor(Math.random() * Object.keys(Quotes.quotes).length);
+  let colorNumber= Math.floor(Math.random() * colors.length)
   
   const [ quote, setQuote ] = useState(Quotes.quotes[quoteNumber]);
-  const [ color, setColor ] = useState("Green");
+  const [ color, setColor ] = useState(colors[colorNumber]);
 
   function neon() {
     let color = Math.floor(Math.random() * 5);
