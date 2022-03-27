@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import Quotes from './Quotes.json';
+import React, { useState } from 'react';
+import QuoteBox from './Components/QuoteBox';
+import Button from './Components/Button';
 
 function App() {
+
+  let quoteNumber = Math.floor(Math.random() * Object.keys(Quotes.quotes).length);
+  
+  const [ quote, setQuote ] = useState(Quotes.quotes[quoteNumber]);
+  const [ color, setColor ] = useState("Green");
+
+  function neon() {
+    let color = Math.floor(Math.random() * 5);
+    if(color === 0) {
+      setColor('Green')
+    }  else if(color === 1) {
+      setColor('Red');
+    } else if(color === 2) {
+      setColor('Blue');
+    } else if(color === 3) {
+      setColor('Orange');
+    } else if(color === 4) {
+      setColor('Purple');
+    }
+  }
+
+  function changeQuote(){
+    quoteNumber = Math.floor(Math.random() * Object.keys(Quotes.quotes).length);
+    setQuote(Quotes.quotes[quoteNumber]);
+    neon();   
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={`card neon${color}`}>
+      <QuoteBox text={quote}/> 
+      <Button btnColor={color} another={changeQuote}/>    
+      </div>
     </div>
   );
 }
